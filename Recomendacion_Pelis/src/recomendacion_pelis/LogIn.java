@@ -5,6 +5,10 @@
  */
 package recomendacion_pelis;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +24,12 @@ public class LogIn extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+    
+    Connection connection;
+    PreparedStatement preparedStatement;
+    ResultSet resultSet;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,11 +41,11 @@ public class LogIn extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        name = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        paso = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,16 +65,16 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        paso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasoActionPerformed(evt);
             }
         });
 
@@ -75,19 +85,19 @@ public class LogIn extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel2)
                         .addComponent(jLabel1))
-                    .addComponent(jLabel3))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(name)
+                    .addComponent(paso, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,12 +107,12 @@ public class LogIn extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addComponent(paso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -113,7 +123,43 @@ public class LogIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JOptionPane.showMessageDialog(null, "tyvgyb");        // TODO add your handling code here:
+     
+        
+        connection= Conexion.getConnection();
+        String sql ="Select * from usuario  where nombre=? and passwor=?";
+        
+        try{
+        
+             preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setString(1,name.getText());
+             preparedStatement.setString(2,paso.getText());
+            resultSet=preparedStatement.executeQuery();
+                
+          
+             if (  resultSet.next()) {
+                JOptionPane.showMessageDialog(null, " Welcome! ");
+                Pag_Principal pag= new Pag_Principal();
+                pag.setVisible(true);
+                dispose();
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "Wrong user!");
+           
+            }
+
+            connection.close();
+            
+                  
+            
+        }
+            
+         catch (Exception ex) {
+            System.out.println(ex);
+        }
+      
+        
+       
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -122,9 +168,9 @@ public class LogIn extends javax.swing.JFrame {
         back.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void pasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_pasoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,7 +213,7 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField name;
+    private javax.swing.JPasswordField paso;
     // End of variables declaration//GEN-END:variables
 }

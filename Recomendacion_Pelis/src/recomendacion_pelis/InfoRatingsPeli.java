@@ -5,6 +5,10 @@
  */
 package recomendacion_pelis;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,13 +17,50 @@ import javax.swing.JOptionPane;
  */
 public class InfoRatingsPeli extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Tuberculo_Film
-     */
+   Connection connection;
+    PreparedStatement preparedStatement;
+    ResultSet resultSet;
+    private int idPeli;
+    
+        
     public InfoRatingsPeli() {
         initComponents();
+        
     }
+    
+    public InfoRatingsPeli(int id) throws SQLException {
+        initComponents();
+        idPeli = id;
+        
+         try {
+            connection = Conexion.getConnection();
+            preparedStatement = connection.prepareStatement("SELECT nombre,peliyear FROM pelicula WHERE pelino=?");
+                       
+            preparedStatement.setInt(1, 1);
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()){
+                
+                jLabel4.setText(resultSet.getString("nombre"));
+                jLabel3.setText(resultSet.getString("peliyear"));
+            }
+                
 
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }finally{
+         connection.close();
+         
+         }
+        
+        
+    }
+    
+  
+    
+    
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,10 +74,8 @@ public class InfoRatingsPeli extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        ratekk = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -50,31 +89,23 @@ public class InfoRatingsPeli extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setText("Name:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel3.setText("Year: ");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, -1, -1));
 
         jLabel4.setText("jLabel4");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
-
-        jLabel6.setText("jLabel3");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel9.setText("Rating:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
 
         jLabel11.setText("Add your Rating  (0-5)");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 20));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 20));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        ratekk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                ratekkActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 40, 30));
+        getContentPane().add(ratekk, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 40, 30));
 
         jButton1.setText("Post");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +113,7 @@ public class InfoRatingsPeli extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 30));
 
         jButton3.setText("Close");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -90,25 +121,47 @@ public class InfoRatingsPeli extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
-        jLabel7.setText("jLabel3");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel7.setText("Year:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         JOptionPane.showMessageDialog(null, "tyvgyb");          
+        
+         try {
+            connection = Conexion.getConnection();
+            preparedStatement = connection.prepareStatement("INSERT INTO rating (rate_level) VALUES (?)");
+            preparedStatement.setString(1, ratekk.getText());
+           
+            int res = preparedStatement.executeUpdate();
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, " Your rate was saved! ");
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "Error saving your rate ");
+           
+            }
+
+            connection.close();
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        
+               
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void ratekkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ratekkActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_ratekkActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,9 +207,7 @@ public class InfoRatingsPeli extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField ratekk;
     // End of variables declaration//GEN-END:variables
 }

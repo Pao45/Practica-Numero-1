@@ -5,6 +5,10 @@
  */
 package recomendacion_pelis;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author paola
@@ -43,6 +47,9 @@ public class Pag_Principal extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,8 +61,10 @@ public class Pag_Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setText("Mad Max");
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel15.setText("Tuberculo Presidente");
 
         jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\paola\\OneDrive\\Documents\\NetBeansProjects\\Recomendacion_Pelis\\src\\Photos\\descarga (3).jpg")); // NOI18N
@@ -74,6 +83,7 @@ public class Pag_Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel17.setText("Kubo");
 
         jButton8.setIcon(new javax.swing.ImageIcon("C:\\Users\\paola\\OneDrive\\Documents\\NetBeansProjects\\Recomendacion_Pelis\\src\\Photos\\2016year.jpg")); // NOI18N
@@ -84,8 +94,10 @@ public class Pag_Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel6.setText("DeadPool");
 
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel16.setText("La la Land");
 
         jButton9.setIcon(new javax.swing.ImageIcon("C:\\Users\\paola\\OneDrive\\Documents\\NetBeansProjects\\Recomendacion_Pelis\\src\\Photos\\51dNkXEbrPL._SX200_QL80_.jpg")); // NOI18N
@@ -96,6 +108,7 @@ public class Pag_Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel18.setText("The little boy");
 
         jButton10.setIcon(new javax.swing.ImageIcon("C:\\Users\\paola\\OneDrive\\Documents\\NetBeansProjects\\Recomendacion_Pelis\\src\\Photos\\unnamed.jpg")); // NOI18N
@@ -114,6 +127,7 @@ public class Pag_Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel19.setText("Nocturnal Animals");
 
         jButton11.setIcon(new javax.swing.ImageIcon("C:\\Users\\paola\\OneDrive\\Documents\\NetBeansProjects\\Recomendacion_Pelis\\src\\Photos\\unnamed (1).jpg")); // NOI18N
@@ -124,7 +138,19 @@ public class Pag_Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel20.setText("Pans Labyrinth");
+
+        jLabel7.setText("Here are some films for you:");
+
+        jLabel1.setText("jLabel1");
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,7 +171,7 @@ public class Pag_Principal extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
                                 .addComponent(jLabel15)
-                                .addGap(121, 121, 121)
+                                .addGap(106, 106, 106)
                                 .addComponent(jLabel5))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -181,14 +207,27 @@ public class Pag_Principal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(43, 43, 43)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel1)
+                            .addComponent(jButton2))
+                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,7 +238,7 @@ public class Pag_Principal extends javax.swing.JFrame {
                             .addComponent(jLabel15)
                             .addComponent(jLabel17)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(69, 69, 69)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6)))
@@ -220,7 +259,7 @@ public class Pag_Principal extends javax.swing.JFrame {
                         .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel20)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
@@ -233,14 +272,18 @@ public class Pag_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        InfoRatingsPeli tb= new InfoRatingsPeli();
-        tb.setVisible(true);
+              InfoRatingsPeli tb;
+        try {
+            tb = new InfoRatingsPeli(1);
+            tb.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Pag_Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        InfoRatingsPeli tb= new InfoRatingsPeli();
+     InfoRatingsPeli tb= new InfoRatingsPeli();
         tb.setVisible(true);
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -269,6 +312,10 @@ public class Pag_Principal extends javax.swing.JFrame {
         InfoRatingsPeli tb= new InfoRatingsPeli();
         tb.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,12 +355,14 @@ public class Pag_Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -322,5 +371,6 @@ public class Pag_Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }
